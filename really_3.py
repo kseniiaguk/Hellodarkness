@@ -1,1 +1,1 @@
-#I'm trying to do smth new
+n=int(input())
