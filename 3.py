@@ -1,3 +1,4 @@
+#Не обращайте внимания на "3.py", это задание №1
 def rotate(x):
     y=[0]*len(x)
     for i in range(0,len(x)):
