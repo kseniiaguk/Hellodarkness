@@ -9,7 +9,7 @@ public class Main {
         try {
             int numb = Integer.parseInt(input);
             Binar yourNumber = new Binar(numb);
-            System.out.println("В двоичной системе счисления: " + yourNumber.bin());
+            System.out.println("В двоичной системе счисления: " + yourNumber.toBin());
         }
         catch (IllegalArgumentException e){
             System.out.println("Неверный ввод");
