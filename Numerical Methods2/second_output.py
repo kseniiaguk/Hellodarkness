@@ -1,0 +1,117 @@
+from second import *
+# --------------------------------------------------------------------
+# ПРОВЕРКИ
+# --------------------------------------------------------------------
+
+
+epsilon = 1e-8
+x_0 = np.array([[0.5], [0.5], [1.5], [-1.0], [-0.5], [1.5], [0.5], [-0.5], [1.5], [-1.5]])
+x_1 = np.array([[0.5], [0.5], [1.5], [-1.0], [-0.2], [1.5], [0.5], [-0.5], [1.5], [-1.5]])
+x_newton, iterations_newton, operations_newton, lasting_newton = newton(func, jacobi_matrix, epsilon, x_0)
+print('------------------------------------------------------')
+print('a) Метод Ньютона.')
+print('------------------------------------------------------\n')
+print('Начальное приближение:\n', x_0)
+print('Решение:\n', x_newton)
+print('Проверим подстановкой:\n', func(x_newton))
+print('Количество итераций:\n', iterations_newton)
+print('Количество операций:\n', operations_newton)
+print('Время:\n', lasting_newton, ' сек.')
+x_mod, iterations_mod, operations_mod, lasting_mod = newton_modified(func, jacobi_matrix, epsilon, x_0)
+print('------------------------------------------------------')
+print('b) Модифицированный метод Ньютона.')
+print('------------------------------------------------------\n')
+print('Начальное приближение:\n', x_0)
+print('Решение:\n', x_mod)
+print('Проверим подстановкой:\n', func(x_mod))
+print('Количество итераций:\n', iterations_mod)
+print('Количество операций:\n', operations_mod)
+print('Время:\n', lasting_mod, ' сек.')
+x_trans, iterations_trans, operations_trans, lasting_trans = newton_transition(3, func, jacobi_matrix, epsilon, x_0)
+print('------------------------------------------------------')
+print('c) Переход на модифицированный метод Ньютона на k-й итерации.')
+print('------------------------------------------------------\n')
+print('Начальное приближение:\n', x_0)
+print('Решение:\n', x_trans)
+print('Проверим подстановкой:\n', func(x_trans))
+print('Количество итераций:\n', iterations_trans)
+print('Количество операций:\n', operations_trans)
+print('Время:\n', lasting_trans, ' сек.')
+x_per, iterations_per, operations_per, lasting_per = newton_periodic(5, func, jacobi_matrix, epsilon, x_0)
+print('------------------------------------------------------')
+print('d) Гибридный метод.')
+print('------------------------------------------------------\n')
+print('Начальное приближение:\n', x_0)
+print('Решение:\n', x_per)
+print('Проверим подстановкой:\n', func(x_per))
+print('Количество итераций:\n', iterations_per)
+print('Количество операций:\n', operations_per)
+print('Время:\n', lasting_per, ' сек.')
+print('------------------------------------------------------')
+print('e) Возьмём другое начальное приближение и рассмотрим работу методов с ним.')
+print('------------------------------------------------------\n')
+x_newton, iterations_newton, operations_newton, lasting_newton = newton(func, jacobi_matrix, epsilon, x_1)
+print('Начальное приближение:\n', x_1)
+if x_newton is not None:
+    print('1) Метод Ньютона.')
+    print('Решение:\n', x_newton)
+    print('Проверим подстановкой:\n', func(x_newton))
+    print('Количество итераций:\n', iterations_newton)
+    print('Количество операций:\n', operations_newton)
+    print('Время:\n', lasting_newton, ' сек.')
+else:
+    print('1) Метод Ньютона расходится при данном начальном приближении')
+x_mod, iterations_mod, operations_mod, lasting_mod = newton_modified(func, jacobi_matrix, epsilon, x_1)
+if x_mod is not None:
+    print('2) Модифицированный метод Ньютона.')
+    print('Решение:\n', x_mod)
+    print('Проверим подстановкой:\n', func(x_mod))
+    print('Количество итераций:\n', iterations_mod)
+    print('Количество операций:\n', operations_mod)
+    print('Время:\n', lasting_mod, ' сек.')
+else:
+    print('2) Модифицированный метод Ньютона расходится при данном начальном приближении')
+x_trans, iterations_trans, operations_trans, lasting_trans = newton_transition(6, func, jacobi_matrix, epsilon, x_1)
+print('3) Переход на модифицированный метод Ньютона на k-й итерации.')
+print('Рассмотрим k<7. Для примера возьмём k=6')
+if x_trans is not None:
+    print('Решение:\n', x_trans)
+    print('Проверим подстановкой:\n', func(x_trans))
+    print('Количество итераций:\n', iterations_trans)
+    print('Количество операций:\n', operations_trans)
+    print('Время:\n', lasting_trans, ' сек.')
+else:
+    print('Метод Ньютона, переходящий на модифицированный метод Ньютона на k-й итерации расходится при данном '
+          'начальном приближении и данном k')
+x_trans, iterations_trans, operations_trans, lasting_trans = newton_transition(7, func, jacobi_matrix, epsilon, x_1)
+print('Теперь проверим k=7.')
+if x_trans is not None:
+    print('Решение:\n', x_trans)
+    print('Проверим подстановкой:\n', func(x_trans))
+    print('Количество итераций:\n', iterations_trans)
+    print('Количество операций:\n', operations_trans)
+    print('Время:\n', lasting_trans, ' сек.')
+else:
+    print('Метод Ньютона, переходящий на модифицированный метод Ньютона на k-й итерации расходится при данном '
+          'начальном приближении и данном k')
+x_trans, iterations_trans, operations_trans, lasting_trans = newton_transition(8, func, jacobi_matrix, epsilon, x_1)
+print('Наконец рассмотрим k>7. Для примера возьмём k=8')
+if x_trans is not None:
+    print('Решение:\n', x_trans)
+    print('Проверим подстановкой:\n', func(x_trans))
+    print('Количество итераций:\n', iterations_trans)
+    print('Количество операций:\n', operations_trans)
+    print('Время:\n', lasting_trans, ' сек.')
+else:
+    print('Метод Ньютона, переходящий на модифицированный метод Ньютона на k-й итерации расходится при данном '
+          'начальном приближении и данном k')
+x_per, iterations_per, operations_per, lasting_per = newton_periodic(5, func, jacobi_matrix, epsilon, x_1)
+print('4) Гибридный метод.')
+if x_per is not None:
+    print('Решение:\n', x_per)
+    print('Проверим подстановкой:\n', func(x_per))
+    print('Количество итераций:\n', iterations_per)
+    print('Количество операций:\n', operations_per)
+    print('Время:\n', lasting_per, ' сек.')
+else:
+    print('Гибридный метод расходится при данном начальном приближении и данном k')
